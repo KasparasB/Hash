@@ -38,6 +38,9 @@ Sukurkite Jūsų (t.y. pabandykite neieškoti *hash* funkcijų pavyzdžių Inter
 
 ### Naudojimas
 
+1. g++ test source.cpp
+2. test <"įvedamas hash'inamas žodis"> arba <"tekstinio fail'o pavadinimas"> 
+
 ### Veikimas
 
 1. Programa nuskaito simbolių eilutę.
