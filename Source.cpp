@@ -1,23 +1,8 @@
-#include <iostream>
-#include <math.h>
-#include <string>
-#include <vector>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sstream>
-#include <assert.h>
-#include <algorithm>
-#include <fstream>
+#include <C:\Users\Kasparas\source\repos\Hash\Hash\Header.h>
 
-using std::string;
-using std::cout;
-using std::endl;
-using std::to_string;
-using std::cin;
-using std::vector;
-
+/*
 string encryptDecrypt(string toEncrypt, int &cycle, string word) {
-	char key[100]; //Any char will work
+	char key[100]; 
 
 	//string key2 = "uQvWoEzRsTjYgU4IkOqP2AfSrDtF7GaHiJbK8L6Z3xyCmVhBnN9Mwxc1dp5el";
 	for (int i = 0; i < word.length(); i++)
@@ -37,12 +22,6 @@ string encryptDecrypt(string toEncrypt, int &cycle, string word) {
 	return output;
 }
 
-char nth_letter(int n)
-{
-	assert(n >= 1 && n <= 46);
-		return "uQvWoEzRsTjYgU4IkOqP2AfSrDtF7GaHiJbK8L6Z3xyCmVhBnN9Mwxc1dp5el"[n - 1];
-}
-
 void vectorToChar(vector<int> &values, vector<string> word)
 {
 	string tmp1 = word[0];
@@ -60,9 +39,6 @@ void vectorToChar(vector<int> &values, vector<string> word)
 	std::reverse(word[0].begin(), word[0].end());
 	tmpReversed = word[0];
 
-	
-	
-	
 	word.push_back(tmpReversed);
 	word[0] = tmp1;
 
@@ -119,14 +95,6 @@ void intToHex(vector<int> &intValues, vector<string> &hexValues)
 					num /= 16;
 				}
 		}
-	
-	
-	/*
-	for (int i = 0; i < 100; i++)
-	{
-		cout << hexNumber[i] << " ";
-	}
-	*/
 }
 
 int sumOfNumbers(int numbers)
@@ -190,9 +158,8 @@ void input(string &decision, int &file)
 			break;
 	}
 }
+*/
 
-std::ifstream in;
-std::ofstream out;
 
 int main(int argc, char* argv[])
 {
@@ -200,82 +167,21 @@ int main(int argc, char* argv[])
 	int file = 0;
 	//cout << argv[1] << endl;
 	//string temp = argv[1];
-	string temp = "konstitucija.txt";
+	string temp = "simb1.txt";
 	vector<int> values(100,0);
 	vector<string> word;
 	vector<char> word2;
 	vector<string> hexValues;
 	string hashedWord = "";
 	
-	int argLength = temp.length();
-
-	if (temp[argLength - 1] == 't' && temp[argLength - 2] == 'x' && temp[argLength - 3] == 't' && temp[argLength - 4] == '.') 
+	read(temp, file);
+	if (file != 2)
 	{
-		string tmp = "";
-		in.open(temp);
-		file = 1;
-		temp = "";
-		while (in.peek() != EOF)
-		{
-			in >> temp;
-			word.push_back(temp);
-		}
-		
-		int sk = 0;
-
-		if (word.size() == 1)
-		{
-
-		}
-		else
-		{
-			for (int i = 0; i < word.size() - 1; i++)
-			{
-
-				if (word[i].length() == 1)
-				{
-					sk = (int)word[i][0];
-					values[0] += sk;
-				}
-				else
-				{
-					for (int j = 0; j < word[i].length() - 1; j++)
-					{
-						sk = (int)word[i][j];
-						values[j] += sk;
-					}
-				}
-
-
-			}
-		}
-			
-		
+		word.push_back(temp);
+		vectorToChar(values, word);
+		intToHex(values, hexValues);
+		charHextoStringHex(hexValues, hashedWord);
+		cout << hashedWord << endl;
 	}
-	
-	if (file == 1)
-	{
-		temp = "";
-		
-		if (word.size() == 1)
-		{
-			temp += word[0];
-		}
-			
-		else
-			for (int i = 0; i < values.size() - 1; i++) temp += (char)values[i];
-
-		word.clear();
-		word.shrink_to_fit();
-	}
-	values.clear();
-	values.shrink_to_fit();
-	word.push_back(temp);
-	vectorToChar(values, word);
-	intToHex(values, hexValues);
-	charHextoStringHex(hexValues, hashedWord);
-	cout << hashedWord << endl;
 	system("PAUSE");
-	in.close();
-	out.close();
 }
