@@ -57,4 +57,11 @@ Programos veikimas yra neefektyvus, nemažai elementų yra "įhardcodinti". Prog
 Dėl hash'o realizacijos spragų gaunamas per Konstitucijos output'as yra neteisingas: E1A70864C2F39F.
 
 
+### [v0.2](https://github.com/KasparasB/Duomenu_Apdorojimas/releases/tag/v0.1) papildymas
+
+###Pakeitimai
+1. Pataisyta nemažai kodo klaidų, dėl kurių negalėjo veikti pirma versija.
+2. Failas išskirstytas į Header.h, Source.cpp, Functions.cpp.
+3. Sukurtas makefile.
+4. Sukurti tekstiniai dokumentai testavimui.
 
