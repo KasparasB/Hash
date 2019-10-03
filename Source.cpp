@@ -13,12 +13,15 @@ int main(int argc, char* argv[])
 	vector<string> hexValues;
 	string hashedWord = "";
 	read(temp, file);
+	Stopwatch a;
 	if (file != 2)
-	{
+	{	
 		word.push_back(temp);
+		a.Start();
 		vectorToChar(values, word);
 		intToHex(values, hexValues);
 		charHextoStringHex(hexValues, hashedWord);
+		a.End("Trukme: ");
 		cout << hashedWord << endl;
 	}
 	system("PAUSE");
