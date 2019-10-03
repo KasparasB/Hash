@@ -59,9 +59,10 @@ Dėl hash'o realizacijos spragų gaunamas per Konstitucijos output'as yra neteis
 
 ### [v0.2](https://github.com/KasparasB/Duomenu_Apdorojimas/releases/tag/v0.1) papildymas
 
-###Pakeitimai
+### Pakeitimai
 1. Pataisyta nemažai kodo klaidų, dėl kurių negalėjo veikti pirma versija.
 2. Failas išskirstytas į Header.h, Source.cpp, Functions.cpp.
 3. Sukurtas makefile.
 4. Sukurti tekstiniai dokumentai testavimui.
+5. Tikrinama ar failas nėra tuščias.
 
