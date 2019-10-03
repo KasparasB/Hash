@@ -57,7 +57,7 @@ Programos veikimas yra neefektyvus, nemažai elementų yra "įhardcodinti". Prog
 Dėl hash'o realizacijos spragų gaunamas per Konstitucijos output'as yra neteisingas: E1A70864C2F39F.
 
 
-### [v0.2](https://github.com/KasparasB/Duomenu_Apdorojimas/releases/tag/v0.1) papildymas
+### [v0.2](https://github.com/KasparasB/Duomenu_Apdorojimas/releases/tag/v0.1.1) papildymas
 
 ### Pakeitimai
 1. Pataisyta nemažai kodo klaidų, dėl kurių negalėjo veikti pirma versija.
@@ -65,4 +65,8 @@ Dėl hash'o realizacijos spragų gaunamas per Konstitucijos output'as yra neteis
 3. Sukurtas makefile.
 4. Sukurti tekstiniai dokumentai testavimui.
 5. Tikrinama ar failas nėra tuščias.
+
+Problemos nutinka 3 - 4 testų metu, nes programa nustatyta skaityti ne eilutę, o vieną didelį stringą, dėl to kai reikia užhash'inti daug smulkių eilučių ar stringų, to padaryti nepavyksta dėl kodo klaidų.
+
+Programos metu stengiausi iškraipyti ASCII skaičius taip, kad juos pavertus į šešioliktainius jie taptų kuo skirtingesni ir net menkiausias pakitimas pakeistų hash'ą. Iš dalies pavyko tai atlikti.
 
