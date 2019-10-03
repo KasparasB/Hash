@@ -15,12 +15,16 @@ void Stopwatch::End(string action) {
 
 
 string encryptDecrypt(string toEncrypt, int &cycle, string word) {
-	char key[100];
+	int keyLength = word.length();
+	//unsigned char key[10000000];
+
+	vector<char> key(keyLength);
 
 	//string key2 = "uQvWoEzRsTjYgU4IkOqP2AfSrDtF7GaHiJbK8L6Z3xyCmVhBnN9Mwxc1dp5el";
-	for (int i = 0; i < word.length(); i++)
+	key[0] = word[0] ^ '}' ^ '_';
+	for (int i = 1; i < word.length()-1; i++)
 	{
-		key[i] = word[i] * pow(key[i], 5);
+		key[i] = word[i-1] * 3;
 	}
 	string output = toEncrypt;
 	output[0] = word[0] ^ (toEncrypt[0] + 1);
@@ -31,7 +35,8 @@ string encryptDecrypt(string toEncrypt, int &cycle, string word) {
 		output[i] = toEncrypt[i] ^ key[i - 1] ^ key[i - 2] ^ word[i] * 15;
 		cycle++;
 	}
-
+	key.clear();
+	key.shrink_to_fit();
 	return output;
 }
 
@@ -49,7 +54,7 @@ void vectorToChar(vector<int> &values, vector<string> word)
 		temporary = word[0][0] ^ (char)gg;
 		word.push_back(temporary);
 	}
-	std::reverse(word[0].begin(), word[0].end());
+	std::reverse(word.begin(), word.end());
 	tmpReversed = word[0];
 
 	word.push_back(tmpReversed);
@@ -59,13 +64,15 @@ void vectorToChar(vector<int> &values, vector<string> word)
 	word.push_back(tmp2);
 
 	int ciklas = 3;
-	while (word[ciklas - 1].length() < 60)
+	while (true)
 	{
+		if ((word[ciklas - 1].length() > 64) && ciklas > 7)break;
 		std::reverse(word[ciklas - 1].begin(), word[ciklas - 1].end());
 		string key1 = word[ciklas - 1];
 		tmp2 = tmp2 + encryptDecrypt(word[ciklas - 2], cycle, key1);
 		word.push_back(tmp2);
 		ciklas++;
+		//cout << ciklas << endl;
 	}
 	tmp1 = tmp2;
 	//cout << tmp2 << endl;
@@ -73,7 +80,7 @@ void vectorToChar(vector<int> &values, vector<string> word)
 	{
 		temp = (int)tmp1[i];
 		if (temp < 0) temp *= -1;
-		values.push_back(temp * (pow(i, 3)));
+		values.push_back(temp * (i*(i+i)));
 	}
 
 }
@@ -128,11 +135,15 @@ int sumOfNumbers(int numbers)
 void charHextoStringHex(vector<string> values, string &hashedWord)
 {
 	int x = 0;
-
-	for (int i = 10; i < 60; i++)
+	string temp = "";
+	for (int i = 0; i < values.size(); i++)
 	{
-		if (x >= 100) break;
-		if (values[i] == "") continue;
+		//if (x >= 63) break;
+		if (values[i] == "")
+		{
+			continue;
+		}
+		
 		if (values[i].length() == 1)
 		{
 			hashedWord += values[i][0];
@@ -142,20 +153,29 @@ void charHextoStringHex(vector<string> values, string &hashedWord)
 		{
 			for (int j = 0; j < values[i].length() - 1; j++)
 			{
-				if (x >= 100) break;
+				//if (x >= 63) break;
 				hashedWord += values[i][j];
 				x++;
 			}
 		}
 	}
+	std::reverse(hashedWord.begin(), hashedWord.end());
+	for (int i = 0; i < 64; i++)
+	{
+		temp += hashedWord[i];
+	}
+
+	hashedWord = temp;
+
 
 }
 
 void read(string &temp, int &file)
 {
 	vector<string> word;
-	vector<int> values;
 	int argLength = temp.length();
+	vector<int> values(1000000,0);
+	
 
 	string tmp = "";
 
@@ -204,22 +224,25 @@ void read(string &temp, int &file)
 			if (word.size() == 1)
 			{
 				tmp = "";
-				tmp = word[0];
-			}
-			if (word.size() > 1)
-			{
-				for (int i = 0; i < values.size() - 1; i++) tmp += (char)values[i];
+				temp = word[0];
 			}
 			else
 			{
-				file = 2;
-				cout << "Neteisingas failas arba zodziu/ simboliu faile nera." << endl;
+				if((word.size() > 1))
+					for (int i = 0; i < values.size() - 1; i++) temp += (char)values[i];
+				else
+				{
+					file = 2;
+					cout << "Neteisingas failas arba zodziu/ simboliu faile nera." << endl;
+				}
 			}
+			
 		}
 		word.clear();
 		word.shrink_to_fit();
-
+		
 		values.clear();
 		values.shrink_to_fit();
+		values.resize(0);
 	}
 }
